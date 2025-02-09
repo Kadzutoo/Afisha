@@ -22,3 +22,11 @@ class Review(models.Model):
     def __str__(self):
         return f"Review for {self.movie.title}"
 
+
+class Review(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name="reviews")
+    text = models.TextField()
+    stars = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f'{self.text[:20]}... ({self.stars}⭐)'
