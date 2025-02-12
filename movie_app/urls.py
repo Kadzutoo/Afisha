@@ -1,20 +1,29 @@
 from django.urls import path
 from .views import (
-    DirectorListView, DirectorDetailView,
-    MovieListView, MovieDetailView,
-    ReviewListView, ReviewDetailView,
-    MoviesWithReviewsView, DirectorsWithMoviesCountView
+    DirectorCreateView,
+    DirectorDetailView,
+    DirectorUpdateDeleteView,
+    MovieCreateView,
+    MovieDetailView,
+    MovieUpdateDeleteView,
+    ReviewCreateView,
+    ReviewDetailView,
+    ReviewUpdateDeleteView,
 )
 
 urlpatterns = [
-    path('directors/', DirectorListView.as_view(), name='director-list'),
+    # Режиссеры
+    path('directors/', DirectorCreateView.as_view(), name='director-create'),
     path('directors/<int:pk>/', DirectorDetailView.as_view(), name='director-detail'),
-    path('movies/', MovieListView.as_view(), name='movie-list'),
-    path('movies/<int:pk>/', MovieDetailView.as_view(), name='movie-detail'),
-    path('reviews/', ReviewListView.as_view(), name='review-list'),
-    path('reviews/<int:pk>/', ReviewDetailView.as_view(), name='review-detail'),
+    path('directors/<int:pk>/update-delete/', DirectorUpdateDeleteView.as_view(), name='director-update-delete'),
 
-    # Новые маршруты
-    path('movies/reviews/', MoviesWithReviewsView.as_view(), name='movies-with-reviews'),
-    path('directors/movies_count/', DirectorsWithMoviesCountView.as_view(), name='directors-with-movies-count'),
+    # Фильмы
+    path('movies/', MovieCreateView.as_view(), name='movie-create'),
+    path('movies/<int:pk>/', MovieDetailView.as_view(), name='movie-detail'),
+    path('movies/<int:pk>/update-delete/', MovieUpdateDeleteView.as_view(), name='movie-update-delete'),
+
+    # Отзывы
+    path('reviews/', ReviewCreateView.as_view(), name='review-create'),
+    path('reviews/<int:pk>/', ReviewDetailView.as_view(), name='review-detail'),
+    path('reviews/<int:pk>/update-delete/', ReviewUpdateDeleteView.as_view(), name='review-update-delete'),
 ]
